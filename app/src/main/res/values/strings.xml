@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Travel Stories</string>
+    <string name="db_name">travel_stories</string>
+    <string name="add_album">Add Album</string>
+    <string name="back_arrow">Back</string>
+    <string name="Done">Done</string>
+</resources>

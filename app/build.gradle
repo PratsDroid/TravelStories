@@ -1,0 +1,83 @@
+import com.forevertea.travelstories.Libs
+import com.forevertea.travelstories.Versions
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.forevertea.travelstories"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    configurations {
+        cleanedAnnotations
+        compile.exclude group: 'org.jetbrains' , module:'annotations'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.compose
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.Compose.ui
+    implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.tooling
+    implementation Libs.AndroidX.lifeCycle
+    implementation Libs.AndroidX.Compose.activity
+    implementation Libs.AndroidX.Compose.runtime_livedata
+    implementation Libs.AndroidX.Navigation.uiNavigation
+    implementation Libs.AndroidX.Navigation.composeNavigation
+    implementation Libs.AndroidX.Navigation.fragmentNavigation
+    implementation Libs.AndroidX.Room.room
+    implementation Libs.AndroidX.Room.roomKtx
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
+    implementation "androidx.compose.ui:ui-util:1.0.0-alpha01"
+    annotationProcessor Libs.AndroidX.Room.roomCompiler
+    implementation Libs.AndroidX.Coroutine.core
+    implementation Libs.AndroidX.Coroutine.android
+    implementation Libs.AndroidX.Coil.coil_compose
+    kapt Libs.AndroidX.Room.roomCompiler
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.AndroidX.Test.junit
+    androidTestImplementation Libs.AndroidX.Test.espressoCore
+    androidTestImplementation Libs.AndroidX.Test.junitCompose
+}
